@@ -1,0 +1,746 @@
+/* ===== 基础 ===== */
+.app-root {
+  min-height: 100vh;
+  transition: background 0.4s ease;
+  position: relative;
+}
+
+/* 确保 Ant Design Layout 在玻璃模式下透明 */
+.theme-glass .ant-layout,
+.theme-glass .ant-layout-sider {
+  background: transparent !important;
+}
+
+/* 侧边栏收放动画 — 仅过渡 width，避免 backdrop-filter 重算引起的卡顿 */
+.ant-layout-sider {
+  transition: width 0.2s ease, min-width 0.2s ease, max-width 0.2s ease !important;
+}
+
+.ant-layout-sider + .ant-layout {
+  transition: margin-left 0.2s ease !important;
+}
+
+/* ===== 亮色模式（原玻璃温柔的质感） ===== */
+.app-root.theme-light {
+  background: linear-gradient(160deg, #f5f0eb 0%, #e8ecf1 25%, #edf0f4 50%, #f0ece6 75%, #f3f1ed 100%);
+  background-attachment: fixed;
+}
+
+.app-root.theme-light::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 25%, rgba(180,200,230,0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 55% at 80% 70%, rgba(200,180,220,0.3) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 60% at 50% 50%, rgba(160,200,190,0.25) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  animation: lightAmbient 15s ease-in-out infinite alternate;
+}
+
+@keyframes lightAmbient {
+  0% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
+  100% { opacity: 0.8; transform: scale(0.98); }
+}
+
+/* 亮色模式卡片 */
+.theme-light .ant-card {
+  background: rgba(255,255,255,0.5) !important;
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: none !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.03) !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-light .ant-card:hover {
+  background: rgba(255,255,255,0.6) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
+}
+
+.theme-light .ant-table-thead > tr > th {
+  background: rgba(255,255,255,0.3) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+.theme-light .ant-table-tbody > tr > td {
+  border-bottom: 1px solid rgba(0,0,0,0.03) !important;
+}
+
+.theme-light .ant-table-tbody > tr:hover > td {
+  background: rgba(255,255,255,0.3) !important;
+}
+
+.theme-light .ant-table {
+  background: transparent !important;
+}
+
+.theme-light .ant-modal-content {
+  background: rgba(255,255,255,0.75) !important;
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: none !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08) !important;
+}
+
+.theme-light .ant-modal-header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+.theme-light .ant-input,
+.theme-light .ant-select-selector {
+  background: rgba(255,255,255,0.55) !important;
+ 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.theme-light .ant-tag {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: none !important;
+}
+
+.theme-light .ant-descriptions-item-label {
+  background: rgba(255,255,255,0.3) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+.theme-light .ant-descriptions-item-content {
+  background: rgba(255,255,255,0.15) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+.theme-light .ant-pagination-item {
+  background: rgba(255,255,255,0.45) !important;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.theme-light .ant-pagination-item-active {
+  background: rgba(26,107,58,0.1) !important;
+  border-color: rgba(26,107,58,0.15) !important;
+}
+
+.theme-light .recharts-cartesian-grid-horizontal line,
+.theme-light .recharts-cartesian-grid-vertical line {
+  stroke: rgba(0,0,0,0.04) !important;
+}
+
+.theme-light .recharts-default-tooltip {
+  background: rgba(255,255,255,0.8) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06) !important;
+}
+
+/* ===== 暗黑模式 ===== */
+.app-root.theme-dark {
+  background: #0a0a0a;
+}
+
+.theme-dark .ant-card {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.theme-dark .ant-card-head {
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  padding: 12px 16px !important;
+}
+
+.theme-dark .ant-card-head-title {
+  color: rgba(255,255,255,0.85) !important;
+  font-weight: 500 !important;
+}
+
+.theme-dark .ant-table {
+  background: #1a1a1a !important;
+  color: rgba(255,255,255,0.85) !important;
+}
+
+.theme-dark .ant-table-thead > tr > th {
+  background: #141414 !important;
+  color: rgba(255,255,255,0.55) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  font-weight: 500 !important;
+}
+
+.theme-dark .ant-table-tbody > tr > td {
+  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+  color: rgba(255,255,255,0.75) !important;
+}
+
+.theme-dark .ant-table-tbody > tr:hover > td {
+  background: rgba(255,255,255,0.02) !important;
+}
+
+.theme-dark .ant-modal-content {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+.theme-dark .ant-modal-header {
+  background: #1a1a1a !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+.theme-dark .ant-modal-title {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+.theme-dark .ant-descriptions-item-label {
+  background: #141414 !important;
+  color: rgba(255,255,255,0.65) !important;
+}
+
+.theme-dark .ant-descriptions-item-content {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+.theme-dark .ant-select-selector {
+  background: #141414 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+
+.theme-dark .ant-select-selector .ant-select-selection-placeholder {
+  color: rgba(255,255,255,0.35) !important;
+}
+
+.theme-dark .ant-input {
+  background: #141414 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: rgba(255,255,255,0.85) !important;
+}
+
+.theme-dark .ant-input::placeholder {
+  color: rgba(255,255,255,0.35) !important;
+}
+
+.theme-dark .recharts-text {
+  fill: rgba(255,255,255,0.45) !important;
+}
+
+.theme-dark .recharts-cartesian-grid-horizontal line,
+.theme-dark .recharts-cartesian-grid-vertical line {
+  stroke: rgba(255,255,255,0.06) !important;
+}
+
+/* 暗黑模式：标题/标签文字颜色 */
+.theme-dark .ant-card-title,
+.theme-dark .ant-card-head-title {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* 暗黑模式：统计数字标题 */
+.theme-dark .ant-statistic-title {
+  color: rgba(255,255,255,0.45) !important;
+}
+
+.theme-dark .ant-statistic-content {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* 暗黑模式：校区卡片标题 */
+.theme-dark [style*="color: '#333'"],
+.theme-dark [style*="color:'#333'"] {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+/* 暗黑模式：部门概览 */
+.theme-dark [style*="color: '#333'"] {
+  color: rgba(255,255,255,0.7) !important;
+}
+
+/* 暗黑模式：进度条轨道 */
+.theme-dark .ant-progress-bg {
+  transition: width 0.3s;
+}
+
+.theme-dark .ant-progress-inner {
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* 暗黑模式：Recharts 图表 */
+.theme-dark .recharts-default-tooltip {
+  background: rgba(26,26,26,0.95) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 6px !important;
+}
+
+.theme-dark .recharts-tooltip-label {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+.theme-dark .recharts-tooltip-item {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+/* 暗黑模式：解决率信息框 */
+.theme-dark .resolve-info-box {
+  background: rgba(255,255,255,0.03) !important;
+  color: rgba(255,255,255,0.55) !important;
+}
+
+/* 暗黑模式：紧急提示框 */
+.theme-dark [style*="background: '#fff7e6'"] {
+  background: rgba(255,170,50,0.08) !important;
+  border-color: rgba(255,170,50,0.2) !important;
+  color: rgba(255,200,80,0.85) !important;
+}
+
+/* 暗黑模式：空状态 */
+.theme-dark .ant-empty-description {
+  color: rgba(255,255,255,0.35) !important;
+}
+
+/* 暗黑模式：分割线 */
+.theme-dark .ant-divider {
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* 暗黑模式：标签页 */
+.theme-dark .ant-tabs-tab {
+  color: rgba(255,255,255,0.45) !important;
+}
+
+.theme-dark .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+.theme-dark .ant-tabs-ink-bar {
+  background: #4ade80 !important;
+}
+
+/* 暗黑模式：按钮 */
+.theme-dark .ant-btn-default {
+  background: rgba(255,255,255,0.04) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: rgba(255,255,255,0.65) !important;
+}
+
+.theme-dark .ant-btn-default:hover {
+  border-color: rgba(255,255,255,0.2) !important;
+  color: rgba(255,255,255,0.85) !important;
+}
+
+/* 暗黑模式：徽章/角标 */
+.theme-dark .ant-badge-count {
+  background: #ff4d4f !important;
+}
+
+/* 暗黑模式：下拉菜单 */
+.theme-dark .ant-dropdown-menu {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+.theme-dark .ant-dropdown-menu-item {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+.theme-dark .ant-dropdown-menu-item:hover {
+  background: rgba(255,255,255,0.04) !important;
+}
+
+/* 暗黑模式：气泡卡片 */
+.theme-dark .ant-popover-inner {
+  background: #1a1a1a !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+.theme-dark .ant-popover-title {
+  color: rgba(255,255,255,0.85) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+.theme-dark .ant-popover-inner-content {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+/* ===== 玻璃模式 · 真正通透 ===== */
+.app-root.theme-glass {
+  background:
+    linear-gradient(145deg, #425878 0%, #4e6890 20%, #5a78a8 40%, #425878 60%, #4e6080 80%, #425878 100%);
+  background-attachment: fixed;
+}
+
+/* 背景光斑——透过玻璃看到的内容 */
+.app-root.theme-glass::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(100,150,255,0.25) 0%, transparent 45%),
+    radial-gradient(circle at 75% 65%, rgba(200,80,180,0.2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(60,200,180,0.18) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(255,180,80,0.15) 0%, transparent 40%),
+    radial-gradient(circle at 10% 60%, rgba(100,200,255,0.12) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 0;
+  animation: glassFlow 18s ease-in-out infinite alternate;
+}
+
+@keyframes glassFlow {
+  0% { opacity: 0.7; transform: scale(1) rotate(0deg); }
+  33% { opacity: 1; transform: scale(1.04) rotate(1deg); }
+  66% { opacity: 0.75; transform: scale(0.97) rotate(-1deg); }
+  100% { opacity: 0.85; transform: scale(1.02) rotate(0.5deg); }
+}
+
+/* 玻璃卡片 —— 通透、无阴影 */
+.theme-glass .ant-card {
+  background: rgba(255,255,255,0.12) !important;
+  backdrop-filter: blur(28px) saturate(150%);
+  -webkit-backdrop-filter: blur(28px) saturate(150%);
+  border: 1px solid rgba(0,0,0,0.04) !important;
+  border-radius: 18px !important;
+  box-shadow: none !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-glass .ant-card:hover {
+  background: rgba(255,255,255,0.18) !important;
+  border-color: rgba(0,0,0,0.06) !important;
+  box-shadow: none !important;
+}
+
+/* 玻璃卡片标题 */
+.theme-glass .ant-card-head {
+  border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+/* 玻璃表格 */
+.theme-glass .ant-table {
+  background: transparent !important;
+}
+
+.theme-glass .ant-table-thead > tr > th {
+  background: rgba(0,0,0,0.02) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+.theme-glass .ant-table-tbody > tr > td {
+  border-bottom: 1px solid rgba(0,0,0,0.03) !important;
+}
+
+.theme-glass .ant-table-tbody > tr:hover > td {
+  background: rgba(0,0,0,0.02) !important;
+}
+
+/* 玻璃 Modal */
+.theme-glass .ant-modal-content {
+  background: rgba(255,255,255,0.55) !important;
+  backdrop-filter: blur(48px) saturate(180%);
+  -webkit-backdrop-filter: blur(48px) saturate(180%);
+  border: 1px solid rgba(0,0,0,0.04) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06) !important;
+}
+
+.theme-glass .ant-modal-header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+/* 玻璃输入框 */
+.theme-glass .ant-input,
+.theme-glass .ant-select-selector,
+.theme-glass .ant-picker {
+  background: rgba(255,255,255,0.4) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,0,0,0.06) !important;
+}
+
+/* 玻璃 Tag */
+.theme-glass .ant-tag {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+/* 玻璃 Descriptions */
+.theme-glass .ant-descriptions-item-label {
+  background: rgba(0,0,0,0.02) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+.theme-glass .ant-descriptions-item-content {
+  border-bottom: 1px solid rgba(0,0,0,0.04) !important;
+}
+
+/* 玻璃分页 */
+.theme-glass .ant-pagination-item {
+  background: rgba(255,255,255,0.35) !important;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.theme-glass .ant-pagination-item-active {
+  background: rgba(26,107,58,0.1) !important;
+  border-color: rgba(26,107,58,0.15) !important;
+}
+
+.theme-glass .ant-pagination-item-active a {
+  color: #1a6b3a !important;
+}
+
+/* 玻璃菜单（light 主题） */
+.theme-glass .ant-menu-light {
+  background: transparent !important;
+}
+
+.theme-glass .ant-menu-light .ant-menu-item-selected {
+  background: rgba(26,107,58,0.1) !important;
+  color: #1a6b3a !important;
+}
+
+/* 玻璃图表 */
+.theme-glass .recharts-cartesian-grid-horizontal line,
+.theme-glass .recharts-cartesian-grid-vertical line {
+  stroke: rgba(0,0,0,0.04) !important;
+}
+
+.theme-glass .recharts-default-tooltip {
+  background: rgba(255,255,255,0.7) !important;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06) !important;
+}
+
+/* ===== 通用：解决率信息框 ===== */
+.resolve-info-box {
+  padding: 10px;
+  background: #f0fdf4;
+  border-radius: 6px;
+  border: 1px solid #b7eb8f;
+  color: #1a6b3a;
+  font-size: 12px;
+}
+
+.theme-dark .resolve-info-box {
+  background: rgba(74, 222, 128, 0.08);
+  border-color: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+}
+
+.theme-dark .resolve-info-box .anticon {
+  color: #4ade80 !important;
+}
+
+.theme-glass .resolve-info-box {
+  background: rgba(26, 107, 58, 0.06);
+  border-color: rgba(26, 107, 58, 0.1);
+  color: #1a6b3a;
+}
+
+/* ===== 通用：回复内容框 ===== */
+.reply-info-box {
+  padding: 12px 16px;
+  background: #f6ffed;
+  border-radius: 8px;
+  border: 1px solid #b7eb8f;
+  line-height: 1.8;
+  color: #333;
+}
+
+.theme-dark .reply-info-box {
+  background: rgba(74, 222, 128, 0.06);
+  border-color: rgba(74, 222, 128, 0.1);
+  color: rgba(255,255,255,0.8);
+}
+
+.theme-glass .reply-info-box {
+  background: rgba(26, 107, 58, 0.04);
+  border-color: rgba(26, 107, 58, 0.08);
+  color: #333;
+}
+
+/* ===== 通用：校区解决率信息条 ===== */
+.campus-rate-box {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: #fafafa;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.campus-rate-label {
+  color: #888;
+}
+
+.theme-dark .campus-rate-box {
+  background: rgba(255,255,255,0.04);
+}
+
+.theme-dark .campus-rate-label {
+  color: rgba(255,255,255,0.4);
+}
+
+.theme-glass .campus-rate-box {
+  background: rgba(0,0,0,0.02);
+}
+
+.theme-glass .campus-rate-label {
+  color: rgba(0,0,0,0.4);
+}
+
+/* ===== 通用：热点追踪表格行样式 ===== */
+.hot-row-critical td,
+.ant-table-tbody .hot-row-critical:hover td {
+  cursor: pointer;
+  background: #fff2f0 !important;
+}
+
+.hot-row-high td,
+.ant-table-tbody .hot-row-high:hover td {
+  cursor: pointer;
+  background: #fffbe6 !important;
+}
+
+.theme-dark .hot-row-critical td,
+.theme-dark .ant-table-tbody .hot-row-critical:hover td {
+  background: rgba(255, 77, 79, 0.12) !important;
+}
+
+.theme-dark .hot-row-high td,
+.theme-dark .ant-table-tbody .hot-row-high:hover td {
+  background: rgba(250, 140, 22, 0.1) !important;
+}
+
+.theme-glass .hot-row-critical td,
+.theme-glass .ant-table-tbody .hot-row-critical:hover td {
+  background: rgba(255, 77, 79, 0.08) !important;
+}
+
+.theme-glass .hot-row-high td,
+.theme-glass .ant-table-tbody .hot-row-high:hover td {
+  background: rgba(250, 140, 22, 0.07) !important;
+}
+
+/* ===== 通用：热点详情框 ===== */
+.detail-info-box {
+  padding: 12px 16px;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #f0f0f0;
+  line-height: 1.8;
+  color: #555;
+}
+
+.detail-info-box-title {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.theme-dark .detail-info-box {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.75);
+}
+
+.theme-dark .detail-info-box-title {
+  color: rgba(255,255,255,0.85);
+}
+
+.theme-glass .detail-info-box {
+  background: rgba(0,0,0,0.02);
+  border-color: rgba(0,0,0,0.05);
+  color: #555;
+}
+
+.theme-glass .detail-info-box-title {
+  color: #333;
+}
+
+/* ===== 滚动条 ===== */
+.theme-dark ::-webkit-scrollbar,
+.theme-glass ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.theme-dark ::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 3px;
+}
+
+.theme-glass ::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.1);
+  border-radius: 3px;
+}
+
+.theme-dark ::-webkit-scrollbar-track,
+.theme-glass ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.theme-light ::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.12);
+  border-radius: 3px;
+}
+
+.theme-light ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ===== 登录页玻璃样式 ===== */
+.login-glass-card.ant-card {
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(20px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  box-shadow: none !important;
+}
+
+.login-glass-card.ant-card:hover {
+  background: rgba(255,255,255,0.08) !important;
+}
+
+.login-glass-card .ant-card-body {
+  background: transparent !important;
+}
+
+.login-glass-card .ant-input-affix-wrapper {
+  background: transparent !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  backdrop-filter: blur(20px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(140%) !important;
+  border-radius: 10px !important;
+}
+
+.login-glass-card .ant-input-affix-wrapper:hover,
+.login-glass-card .ant-input-affix-wrapper:focus,
+.login-glass-card .ant-input-affix-wrapper.ant-input-affix-wrapper-focused {
+  background: transparent !important;
+  border-color: rgba(255,255,255,0.2) !important;
+  box-shadow: none !important;
+}
+
+.login-glass-card .ant-input {
+  color: rgba(255,255,255,0.85) !important;
+  background: transparent !important;
+}
+
+.login-glass-card .ant-input::placeholder {
+  color: rgba(255,255,255,0.35) !important;
+}
+
+.login-glass-card .ant-input-password-icon {
+  color: rgba(255,255,255,0.4) !important;
+}
